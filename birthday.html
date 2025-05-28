@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Omi 🎉</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(-45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+    }
+
+    .glow {
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff3caa, 0 0 30px #ff3caa;
+    }
+
+    .balloon {
+      position: absolute;
+      animation: floatUp 8s infinite ease-in;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 0 }
+      50% { opacity: 1 }
+      100% { transform: translateY(-100vh); opacity: 0 }
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center h-screen text-center overflow-hidden relative">
+
+  <!-- Balloons -->
+  <div class="balloon left-10 text-5xl animate-bounce">🎈</div>
+  <div class="balloon left-1/2 text-5xl animate-bounce delay-1000">🎈</div>
+  <div class="balloon right-10 text-5xl animate-bounce delay-2000">🎈</div>
+
+  <!-- Main Content -->
+  <div class="z-10">
+    <h1 class="text-6xl md:text-8xl font-bold glow text-white animate-pulse">
+      🎉 Happy Birthday Omi 🎂
+    </h1>
+    <p class="mt-6 text-white text-xl md:text-2xl italic">Wishing you joy, love & endless celebrations!</p>
+    <button onclick="launchConfetti()" class="mt-8 px-6 py-3 text-white bg-pink-600 hover:bg-pink-700 rounded-xl shadow-lg transition">
+      🎊 Celebrate!
+    </button>
+  </div>
+
+  <!-- Confetti Script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    function confettiBurst() {
+      window.confetti({
+        particleCount: 200,
+        spread: 160,
+        origin: { y: 0.6 },
+      });
+    }
+
+    function launchConfetti() {
+      const duration = 2 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+      const interval = setInterval(function () {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+        window.confetti(Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: Math.random(), y: Math.random() - 0.2 }
+        }));
+      }, 250);
+    }
+
+    // Auto trigger confetti on page load
+    window.onload = confettiBurst;
+  </script>
+
+</body>
+</html>
