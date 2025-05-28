@@ -39,16 +39,16 @@
     }
   </style>
 </head>
-<body class="flex items-center justify-center h-screen text-center overflow-hidden relative">
+<body class="flex items-center justify-center min-h-screen text-center overflow-hidden relative p-4">
 
   <!-- Balloons -->
-  <div class="balloon left-10 text-5xl animate-bounce">🎈</div>
-  <div class="balloon left-1/2 text-5xl animate-bounce delay-1000">🎈</div>
-  <div class="balloon right-10 text-5xl animate-bounce delay-2000">🎈</div>
+  <div class="balloon left-5 text-3xl sm:text-4xl md:text-5xl animate-bounce">🎈</div>
+  <div class="balloon left-1/2 text-3xl sm:text-4xl md:text-5xl animate-bounce delay-1000">🎈</div>
+  <div class="balloon right-5 text-3xl sm:text-4xl md:text-5xl animate-bounce delay-2000">🎈</div>
 
   <!-- Main Content -->
-  <div class="z-10">
-    <h1 class="text-6xl md:text-8xl font-bold glow text-white animate-pulse">
+  <div class="z-10 max-w-md md:max-w-xl">
+    <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold glow text-white animate-pulse leading-tight">
       🎉 Happy Birthday Omi 🎂
     </h1>
     <p class="mt-6 text-white text-base sm:text-lg md:text-xl italic leading-relaxed px-2">
@@ -58,8 +58,7 @@
       <br><br>
       Happy Birthday, my love! 🎊👑💕
     </p>
-    
-    <button onclick="launchConfetti()" class="mt-8 px-6 py-3 text-white bg-pink-600 hover:bg-pink-700 rounded-xl shadow-lg transition">
+    <button onclick="launchConfetti()" class="mt-8 px-6 py-3 text-white bg-pink-600 hover:bg-pink-700 rounded-xl shadow-lg transition text-sm sm:text-base">
       🎊 Celebrate!
     </button>
   </div>
@@ -82,7 +81,6 @@
 
       const interval = setInterval(function () {
         const timeLeft = animationEnd - Date.now();
-
         if (timeLeft <= 0) {
           return clearInterval(interval);
         }
@@ -95,8 +93,29 @@
       }, 250);
     }
 
-    // Auto trigger confetti on page load
     window.onload = confettiBurst;
+  </script>
+
+  <!-- 🎵 Music Player -->
+  <audio id="birthdaySong" autoplay loop>
+    <source src="birthday-song.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- 🔊 Toggle Button -->
+  <button onclick="toggleMusic()" class="fixed bottom-5 right-5 bg-white text-black text-sm px-4 py-2 rounded shadow-lg hover:bg-pink-200 transition z-50">
+    🔊 Toggle Music
+  </button>
+
+  <script>
+    const song = document.getElementById("birthdaySong");
+    function toggleMusic() {
+      if (song.paused) {
+        song.play();
+      } else {
+        song.pause();
+      }
+    }
   </script>
 
 </body>
